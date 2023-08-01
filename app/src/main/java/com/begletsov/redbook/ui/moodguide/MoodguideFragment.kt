@@ -1,4 +1,4 @@
-package com.begletsov.redbook.ui.home
+package com.begletsov.redbook.ui.moodguide
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,11 +7,11 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.begletsov.redbook.databinding.FragmentHomeBinding
+import com.begletsov.redbook.databinding.FragmentMoodguideBinding
 
-class HomeFragment : Fragment() {
+class MoodguideFragment : Fragment() {
 
-    private var _binding: FragmentHomeBinding? = null
+    private var _binding: FragmentMoodguideBinding? = null
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -22,14 +22,14 @@ class HomeFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val homeViewModel =
-            ViewModelProvider(this).get(HomeViewModel::class.java)
+        val moodguideViewModel =
+            ViewModelProvider(this).get(MoodguideViewModel::class.java)
 
-        _binding = FragmentHomeBinding.inflate(inflater, container, false)
+        _binding = FragmentMoodguideBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val textView: TextView = binding.textHome
-        homeViewModel.text.observe(viewLifecycleOwner) {
+        val textView: TextView = binding.textNotifications
+        moodguideViewModel.text.observe(viewLifecycleOwner) {
             textView.text = it
         }
         return root

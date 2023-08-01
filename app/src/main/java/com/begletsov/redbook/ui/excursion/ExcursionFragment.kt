@@ -1,4 +1,4 @@
-package com.begletsov.redbook.ui.dashboard
+package com.begletsov.redbook.ui.excursion
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,11 +7,11 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.begletsov.redbook.databinding.FragmentDashboardBinding
+import com.begletsov.redbook.databinding.FragmentExcursionBinding
 
-class DashboardFragment : Fragment() {
+class ExcursionFragment : Fragment() {
 
-    private var _binding: FragmentDashboardBinding? = null
+    private var _binding: FragmentExcursionBinding? = null
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -22,14 +22,14 @@ class DashboardFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val dashboardViewModel =
-            ViewModelProvider(this).get(DashboardViewModel::class.java)
+        val excursionViewModel =
+            ViewModelProvider(this).get(ExcursionViewModel::class.java)
 
-        _binding = FragmentDashboardBinding.inflate(inflater, container, false)
+        _binding = FragmentExcursionBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
         val textView: TextView = binding.textDashboard
-        dashboardViewModel.text.observe(viewLifecycleOwner) {
+        excursionViewModel.text.observe(viewLifecycleOwner) {
             textView.text = it
         }
         return root

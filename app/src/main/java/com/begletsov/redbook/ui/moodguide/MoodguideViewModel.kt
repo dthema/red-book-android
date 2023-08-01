@@ -1,10 +1,10 @@
-package com.begletsov.redbook.ui.notifications
+package com.begletsov.redbook.ui.moodguide
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-class NotificationsViewModel : ViewModel() {
+class MoodguideViewModel : ViewModel() {
 
     private val _text = MutableLiveData<String>().apply {
         value = "This is notifications Fragment"

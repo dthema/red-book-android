@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="fragment_title">
+        <item name="android:textSize">@dimen/fragment_title_text_size</item>
+        <item name="android:letterSpacing">0</item>
+        <item name="android:textColor">@color/purple_800</item>
+    </style>
+    <style name="item_title">
+        <item name="android:textSize">@dimen/item_title_text_size</item>
+        <item name="android:letterSpacing">0</item>
+        <item name="android:textColor">@color/purple_800</item>
+    </style>
+</resources>

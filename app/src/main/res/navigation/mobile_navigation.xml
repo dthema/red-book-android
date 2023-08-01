@@ -3,23 +3,23 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/navigation_home">
+    app:startDestination="@+id/navigation_audioguide">
 
     <fragment
-        android:id="@+id/navigation_home"
-        android:name="com.begletsov.redbook.ui.home.HomeFragment"
-        android:label="@string/title_home"
-        tools:layout="@layout/fragment_home" />
+        android:id="@+id/navigation_audioguide"
+        android:name="com.begletsov.redbook.ui.audioguide.AudioguideFragment"
+        android:label="@string/title_audioguide"
+        tools:layout="@layout/fragment_audioguide" />
 
     <fragment
-        android:id="@+id/navigation_dashboard"
-        android:name="com.begletsov.redbook.ui.dashboard.DashboardFragment"
-        android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_dashboard" />
+        android:id="@+id/navigation_excursion"
+        android:name="com.begletsov.redbook.ui.excursion.ExcursionFragment"
+        android:label="@string/title_excursion"
+        tools:layout="@layout/fragment_excursion" />
 
     <fragment
-        android:id="@+id/navigation_notifications"
-        android:name="com.begletsov.redbook.ui.notifications.NotificationsFragment"
-        android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_notifications" />
+        android:id="@+id/navigation_moodguide"
+        android:name="com.begletsov.redbook.ui.moodguide.MoodguideFragment"
+        android:label="@string/title_moodguide"
+        tools:layout="@layout/fragment_moodguide" />
 </navigation>
