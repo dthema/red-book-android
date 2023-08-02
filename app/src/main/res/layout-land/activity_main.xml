@@ -4,34 +4,72 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <androidx.appcompat.widget.AppCompatImageButton
-        android:id="@+id/mainAudioGuideButton"
-        android:layout_width="100dp"
-        android:layout_height="0dp"
-        android:src="@drawable/ic_dashboard_black_24dp"
-        app:layout_constraintBottom_toTopOf="@+id/mainChainGuideButton"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/mainVibeGuideButton" />
-
-    <androidx.appcompat.widget.AppCompatImageButton
-        android:id="@+id/mainVibeGuideButton"
-        android:layout_width="100dp"
-        android:layout_height="0dp"
-        android:src="@drawable/ic_dashboard_black_24dp"
-        app:layout_constraintBaseline_toBottomOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/mainAudioGuideButton"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <androidx.appcompat.widget.AppCompatImageButton
-        android:id="@+id/mainChainGuideButton"
-        android:layout_width="100dp"
-        android:layout_height="0dp"
-        android:src="@drawable/ic_dashboard_black_24dp"
-        app:layout_constraintBaseline_toBottomOf="parent"
+    <LinearLayout
+        android:id="@+id/mainMenu"
+        android:layout_width="55dp"
+        android:layout_height="match_parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/mainAudioGuideButton" />
+        android:background="@color/gray_pink_100"
+        android:weightSum="3"
+        android:orientation="vertical">
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/mainAudioGuideButton"
+            android:layout_width="55dp"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="@color/gray_pink_100"
+            android:src="@drawable/ic_home_black_24dp"/>
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/mainMoodGuideButton"
+            android:layout_width="55dp"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="@color/gray_pink_100"
+            android:src="@drawable/ic_dashboard_black_24dp"/>
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/mainExcursionGuideButton"
+            android:layout_width="55dp"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="@color/gray_pink_100"
+            android:src="@drawable/ic_notifications_black_24dp"/>
+    </LinearLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/optionMenu"
+        android:layout_width="55dp"
+        android:layout_height="match_parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:background="@color/gray_pink_100"
+        android:visibility="gone">
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/likeButton"
+            android:layout_width="55dp"
+            android:layout_height="55dp"
+            android:background="@color/gray_pink_100"
+            android:src="@drawable/ic_home_black_24dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/settingsButton"
+            android:layout_width="55dp"
+            android:layout_height="55dp"
+            android:layout_weight="1"
+            android:background="@color/gray_pink_100"
+            android:src="@drawable/ic_notifications_black_24dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <fragment
         android:id="@+id/nav_host_fragment_activity_main"
@@ -40,8 +78,8 @@
         android:layout_height="match_parent"
         app:defaultNavHost="true"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/mainAudioGuideButton"
+        app:layout_constraintEnd_toStartOf="@id/optionMenu"
+        app:layout_constraintStart_toEndOf="@+id/mainMenu"
         app:layout_constraintTop_toTopOf="parent"
         app:navGraph="@navigation/mobile_navigation" />
 

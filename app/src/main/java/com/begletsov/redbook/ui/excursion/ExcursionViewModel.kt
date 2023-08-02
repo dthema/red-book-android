@@ -7,7 +7,7 @@ import androidx.lifecycle.ViewModel
 class ExcursionViewModel : ViewModel() {
 
     private val _text = MutableLiveData<String>().apply {
-        value = "This is dashboard Fragment"
+        value = "Экран Экскурсий"
     }
     val text: LiveData<String> = _text
 }

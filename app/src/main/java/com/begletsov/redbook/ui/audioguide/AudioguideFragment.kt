@@ -8,6 +8,9 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.begletsov.redbook.databinding.FragmentAudioguideBinding
+import com.begletsov.redbook.models.Category
+import com.begletsov.redbook.ui.utils.CategoryAdapter
+import java.util.UUID
 
 class AudioguideFragment : Fragment() {
 
@@ -28,10 +31,11 @@ class AudioguideFragment : Fragment() {
         _binding = FragmentAudioguideBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val textView: TextView = binding.textView
-        audioguideViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
-        }
+        val adapter = CategoryAdapter(requireContext())
+        binding.audioguideCategoryRecycler.adapter = adapter
+        adapter.currentList.addAll(listOf(Category(UUID.randomUUID(), "Бары", "")))
+        adapter.notifyDataSetChanged()
+
         return root
     }
 

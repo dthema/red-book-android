@@ -7,7 +7,7 @@ import androidx.lifecycle.ViewModel
 class MoodguideViewModel : ViewModel() {
 
     private val _text = MutableLiveData<String>().apply {
-        value = "This is notifications Fragment"
+        value = "Экран Гида по настроению"
     }
     val text: LiveData<String> = _text
 }

@@ -3,36 +3,45 @@ package com.begletsov.redbook.ui.utils
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.GONE
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.begletsov.redbook.R
-import com.begletsov.redbook.databinding.CategoryItemBinding
 import com.begletsov.redbook.databinding.ItemCategoryBinding
 import com.begletsov.redbook.models.Category
+import com.bumptech.glide.Glide
 
-class CategoryAdapter (private val context: Context) :
-    ListAdapter<Category, CategoryAdapter.OrderViewHolder>(OrderDiffCallback) {
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): OrderViewHolder {
+class CategoryAdapter(private val context: Context) :
+    ListAdapter<Category, CategoryAdapter.CategoryViewHolder>(CategoryDiffCallback) {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CategoryViewHolder {
         val itemView = LayoutInflater.from(parent.context).inflate(R.layout.item_category, parent, false)
-        return OrderViewHolder(itemView, viewType, context)
+        return CategoryViewHolder(itemView, context)
     }
 
-    override fun onBindViewHolder(holder: OrderViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: CategoryViewHolder, position: Int) {
         holder.bind(getItem(position))
     }
 
-    class OrderViewHolder(view: View, viewType: Int, private val context: Context) :
+    class CategoryViewHolder(view: View, private val context: Context) :
         RecyclerView.ViewHolder(view) {
-        val binding: ItemCategoryBinding? = null
+        private val binding: ItemCategoryBinding
 
-        fun bind(category: Category?) {
+        init {
+            binding = ItemCategoryBinding.bind(view)
+        }
 
+        fun bind(category: Category) {
+            binding.categoryName.text = category.name
+            if (category.iconFilePath.isEmpty())
+                binding.categoryIcon.visibility = GONE
+            else
+                Glide.with(context).load(category.iconFilePath).into(binding.categoryIcon)
         }
     }
 
-    object OrderDiffCallback : DiffUtil.ItemCallback<Category>() {
+    object CategoryDiffCallback : DiffUtil.ItemCallback<Category>() {
         override fun areItemsTheSame(oldItem: Category, newItem: Category): Boolean {
             return oldItem.id == newItem.id
         }

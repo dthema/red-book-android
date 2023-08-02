@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <style name="media_time">
+        <item name="android:textSize">@dimen/media_time_text_size</item>
+        <item name="android:letterSpacing">0</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
     <style name="fragment_title">
         <item name="android:textSize">@dimen/fragment_title_text_size</item>
         <item name="android:letterSpacing">0</item>
