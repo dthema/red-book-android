@@ -66,6 +66,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.37"
             app:srcCompat="@drawable/baseline_play_arrow" />
 
         <ImageButton
@@ -145,30 +146,77 @@
         app:layout_constraintEnd_toEndOf="@+id/placeImageCard"
         app:layout_constraintStart_toStartOf="@+id/placeImageCard" />
 
-    <include
+    <com.google.android.material.card.MaterialCardView
         android:id="@+id/placePrev"
-        layout="@layout/item_place"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginBottom="32dp"
+        app:cardCornerRadius="@dimen/item_corners_radius"
+        android:layout_marginBottom="16dp"
+        android:layout_marginEnd="8dp"
         app:layout_constraintBottom_toTopOf="@+id/placeMediaSlider"
         app:layout_constraintEnd_toStartOf="@+id/placeNext"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="@+id/placeImageCard"
-        app:layout_constraintTop_toTopOf="@+id/placeNext" />
+        app:layout_constraintTop_toTopOf="@+id/placeNext"
+        app:cardBackgroundColor="@color/gray_pink_100">
 
-    <include
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/item_place_background">
+
+                <TextView
+                    android:id="@+id/placePrevName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="top|start"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="8dp"
+                    android:textAppearance="@style/item_title"
+                    android:textFontWeight="650"
+                    android:text="Место"
+                    android:maxLines="1"
+                    android:textSize="@dimen/item_title_text_size" />
+            </LinearLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.card.MaterialCardView
         android:id="@+id/placeNext"
-        layout="@layout/item_place"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginBottom="32dp"
+        app:cardCornerRadius="@dimen/item_corners_radius"
+        android:layout_marginBottom="16dp"
+        android:layout_marginStart="8dp"
         app:layout_constraintBottom_toTopOf="@+id/placeMediaSlider"
         app:layout_constraintEnd_toEndOf="@+id/placeImageCard"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/placePrev"
-        app:layout_constraintTop_toTopOf="@+id/guideline" />
+        app:layout_constraintTop_toTopOf="@+id/guideline"
+        app:cardBackgroundColor="@color/gray_pink_100">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/item_place_background">
+
+            <TextView
+                android:id="@+id/placeNextName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="top|start"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="8dp"
+                android:textAppearance="@style/item_title"
+                android:textFontWeight="650"
+                android:text="Место"
+                android:maxLines="1"
+                android:textSize="@dimen/item_title_text_size" />
+        </LinearLayout>
+
+    </com.google.android.material.card.MaterialCardView>
 
     <TextView
         android:id="@+id/placeCurrentMediaTime"

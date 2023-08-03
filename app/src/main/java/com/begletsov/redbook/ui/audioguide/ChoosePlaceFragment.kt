@@ -49,7 +49,49 @@ class ChoosePlaceFragment : Fragment() {
                 Description("Let’s Rock", "", "", "https://p1.zoon.ru/c/7/51ff64a2a0f3024a1a000015_5c6a764b312e4.jpg", ""),
                 UUID.randomUUID(),
                 Geopoint(0.0, 0.0)
-            )
+            ),
+            Place(
+                UUID.randomUUID(),
+                Description("Let’s Rock", "", "", "https://p1.zoon.ru/c/7/51ff64a2a0f3024a1a000015_5c6a764b312e4.jpg", ""),
+                UUID.randomUUID(),
+                Geopoint(0.0, 0.0)
+            ),
+            Place(
+                UUID.randomUUID(),
+                Description("Let’s Rock", "", "", "https://p1.zoon.ru/c/7/51ff64a2a0f3024a1a000015_5c6a764b312e4.jpg", ""),
+                UUID.randomUUID(),
+                Geopoint(0.0, 0.0)
+            ),
+            Place(
+                UUID.randomUUID(),
+                Description("Let’s Rock", "", "", "https://p1.zoon.ru/c/7/51ff64a2a0f3024a1a000015_5c6a764b312e4.jpg", ""),
+                UUID.randomUUID(),
+                Geopoint(0.0, 0.0)
+            ),
+            Place(
+                UUID.randomUUID(),
+                Description("Let’s Rock", "", "", "https://p1.zoon.ru/c/7/51ff64a2a0f3024a1a000015_5c6a764b312e4.jpg", ""),
+                UUID.randomUUID(),
+                Geopoint(0.0, 0.0)
+            ),
+            Place(
+                UUID.randomUUID(),
+                Description("Let’s Rock", "", "", "https://p1.zoon.ru/c/7/51ff64a2a0f3024a1a000015_5c6a764b312e4.jpg", ""),
+                UUID.randomUUID(),
+                Geopoint(0.0, 0.0)
+            ),
+            Place(
+                UUID.randomUUID(),
+                Description("Let’s Rock", "", "", "https://p1.zoon.ru/c/7/51ff64a2a0f3024a1a000015_5c6a764b312e4.jpg", ""),
+                UUID.randomUUID(),
+                Geopoint(0.0, 0.0)
+            ),
+            Place(
+                UUID.randomUUID(),
+                Description("Let’s Rock", "", "", "https://p1.zoon.ru/c/7/51ff64a2a0f3024a1a000015_5c6a764b312e4.jpg", ""),
+                UUID.randomUUID(),
+                Geopoint(0.0, 0.0)
+            ),
             ))
 
         binding.placesBack.setOnClickListener { navController.navigate(R.id.action_navigation_choose_place_pop) }

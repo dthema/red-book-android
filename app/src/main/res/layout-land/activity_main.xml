@@ -54,14 +54,14 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         android:background="@color/gray_pink_100"
-        android:visibility="gone">
+        android:visibility="visible">
 
         <androidx.appcompat.widget.AppCompatImageButton
             android:id="@+id/likeButton"
             android:layout_width="55dp"
             android:layout_height="55dp"
             android:background="@color/gray_pink_100"
-            android:src="@drawable/ic_home_black_24dp"
+            android:src="@drawable/baseline_favorite_border"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent"/>
 
@@ -72,7 +72,7 @@
             android:layout_height="55dp"
             android:layout_weight="1"
             android:background="@color/gray_pink_100"
-            android:src="@drawable/ic_notifications_black_24dp"
+            android:src="@drawable/baseline_settings"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"/>
     </androidx.constraintlayout.widget.ConstraintLayout>

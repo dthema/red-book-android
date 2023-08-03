@@ -49,7 +49,9 @@ class MainActivity : AppCompatActivity() {
         binding.mainExcursionGuideButton.setOnClickListener { navController.navigate(R.id.navigation_excursion) }
 
         navController.addOnDestinationChangedListener { controller, destination, arguments ->
-            val id = R.id.navigation_audioguide
+            binding.likeButton.isSelected = false
+            binding.likeButton.setImageResource(R.drawable.baseline_favorite_border)
+
             if (destination.id == R.id.navigation_audioguide ||
                 destination.id == R.id.navigation_excursion ||
                 destination.id == R.id.navigation_moodguide) {
@@ -69,6 +71,15 @@ class MainActivity : AppCompatActivity() {
                 arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE),
                 REQUEST_RECORD_PERMISSION
             )
+        }
+
+        binding.likeButton.isSelected = false
+        binding.likeButton.setOnClickListener {
+            if (it.isSelected)
+                binding.likeButton.setImageResource(R.drawable.baseline_favorite_border)
+            else
+                binding.likeButton.setImageResource(R.drawable.baseline_favorite)
+            it.isSelected = !it.isSelected
         }
     }
 
