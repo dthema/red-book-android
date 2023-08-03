@@ -6,23 +6,23 @@
     android:layout_height="match_parent"
     tools:context=".ui.audioguide.AudioguideFragment">
 
-   <ImageButton
-       android:id="@+id/placesBack"
-       android:layout_width="wrap_content"
-       android:layout_height="wrap_content"
-       android:layout_marginStart="25dp"
-       android:layout_marginTop="30dp"
-       android:rotation="180"
-       android:src="@drawable/baseline_double_arrow_24"
-       android:backgroundTintMode="screen"
-       app:layout_constraintStart_toStartOf="parent"
-       app:layout_constraintTop_toTopOf="parent"  />
+    <ImageButton
+        android:id="@+id/placesBack"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="32dp"
+        android:backgroundTintMode="screen"
+        android:rotation="180"
+        android:src="@drawable/baseline_double_arrow_24"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/placesCategoryTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
+        android:layout_marginStart="8dp"
         android:layout_marginEnd="24dp"
         android:text="Категория"
         android:textAppearance="@style/fragment_title"
@@ -32,15 +32,16 @@
         app:layout_constraintTop_toTopOf="@+id/placesBack" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:layout_width="0dp"
+        android:id="@+id/placesRecyclerView"
+        android:layout_width="wrap_content"
         android:layout_height="0dp"
-        android:layout_marginTop="100dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="24dp"
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-        app:spanCount="4"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/placesCategoryTitle" />
+        app:layout_constraintTop_toBottomOf="@id/placesCategoryTitle"
+        app:spanCount="2" />
 </androidx.constraintlayout.widget.ConstraintLayout>

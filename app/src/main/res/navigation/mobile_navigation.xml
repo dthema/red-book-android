@@ -11,36 +11,48 @@
         android:label="@string/title_audioguide"
         tools:layout="@layout/fragment_audioguide" >
         <action
-            android:id="@+id/action_navigation_audioguide_to_navigation_excursion"
-            app:destination="@id/navigation_excursion" />
-        <action
-            android:id="@+id/action_navigation_audioguide_to_navigation_moodguide"
-            app:destination="@id/navigation_moodguide" />
+            android:id="@+id/action_navigation_audioguide_to_navigation_choose_place"
+            app:destination="@id/navigation_choose_place" />
     </fragment>
 
     <fragment
         android:id="@+id/navigation_excursion"
         android:name="com.begletsov.redbook.ui.excursion.ExcursionFragment"
         android:label="@string/title_excursion"
-        tools:layout="@layout/fragment_excursion" >
-        <action
-            android:id="@+id/action_navigation_excursion_to_navigation_moodguide"
-            app:destination="@id/navigation_moodguide" />
-        <action
-            android:id="@+id/action_navigation_excursion_to_navigation_audioguide"
-            app:destination="@id/navigation_audioguide" />
-    </fragment>
+        tools:layout="@layout/fragment_excursion" />
 
     <fragment
         android:id="@+id/navigation_moodguide"
         android:name="com.begletsov.redbook.ui.moodguide.MoodguideFragment"
         android:label="@string/title_moodguide"
-        tools:layout="@layout/fragment_moodguide" >
+        tools:layout="@layout/fragment_moodguide" />
+
+    <fragment
+        android:id="@+id/navigation_choose_place"
+        android:name="com.begletsov.redbook.ui.audioguide.ChoosePlaceFragment"
+        android:label="@string/choose_place"
+        tools:layout="@layout/fragment_choose_place" >
         <action
-            android:id="@+id/action_navigation_moodguide_to_navigation_excursion"
-            app:destination="@id/navigation_excursion" />
+            android:id="@+id/action_navigation_choose_place_pop"
+            app:popUpTo="@id/navigation_choose_place"
+            app:popUpToInclusive="true" />
         <action
-            android:id="@+id/action_navigation_moodguide_to_navigation_audioguide"
-            app:destination="@id/navigation_audioguide" />
+            android:id="@+id/action_navigation_choose_place_to_navigation_place"
+            app:destination="@id/navigation_place" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_place"
+        android:name="com.begletsov.redbook.ui.audioguide.PlaceFragment"
+        android:label="@string/place"
+        tools:layout="@layout/fragment_place" >
+        <action
+            android:id="@+id/action_navigation_choose_place_pop"
+            app:popUpTo="@id/navigation_choose_place"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_navigation_place_pop"
+            app:popUpTo="@id/navigation_place"
+            app:popUpToInclusive="true" />
     </fragment>
 </navigation>

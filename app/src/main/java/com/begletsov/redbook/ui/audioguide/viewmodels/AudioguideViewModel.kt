@@ -1,4 +1,4 @@
-package com.begletsov.redbook.ui.audioguide
+package com.begletsov.redbook.ui.audioguide.viewmodels
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

@@ -3,4 +3,6 @@
     <string name="title_audioguide">Аудиогид</string>
     <string name="title_excursion">Экскурсии</string>
     <string name="title_moodguide">Гид по настроению</string>
+    <string name="choose_place">Выбор подкаста</string>
+    <string name="place">Подкаст</string>
 </resources>

@@ -10,24 +10,27 @@
         android:id="@+id/audioguigeTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="@style/fragment_title"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="32dp"
         android:text="@string/title_audioguide"
-        android:layout_marginTop="@dimen/title_vertical_margin"
-        android:layout_marginStart="@dimen/title_horizontal_margin"
+        android:textAppearance="@style/fragment_title"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/audioguideCategoryRecycler"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="0dp"
-        android:layout_marginTop="100dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="24dp"
+        android:scrollbars="vertical"
+        android:scrollbarAlwaysDrawVerticalTrack="true"
+        android:fadeScrollbars="false"
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-        app:spanCount="3"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/audioguigeTitle" />
+        app:layout_constraintTop_toBottomOf="@+id/audioguigeTitle"
+        app:spanCount="3" />
 </androidx.constraintlayout.widget.ConstraintLayout>

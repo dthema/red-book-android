@@ -21,7 +21,9 @@
             android:layout_height="0dp"
             android:layout_weight="1"
             android:background="@color/gray_pink_100"
-            android:src="@drawable/ic_home_black_24dp"/>
+            android:scaleType="fitCenter"
+            android:padding="10dp"
+            android:src="@drawable/ic_star"/>
 
         <androidx.appcompat.widget.AppCompatImageButton
             android:id="@+id/mainMoodGuideButton"
@@ -29,7 +31,9 @@
             android:layout_height="0dp"
             android:layout_weight="1"
             android:background="@color/gray_pink_100"
-            android:src="@drawable/ic_dashboard_black_24dp"/>
+            android:padding="8dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/baseline_face"/>
 
         <androidx.appcompat.widget.AppCompatImageButton
             android:id="@+id/mainExcursionGuideButton"
@@ -37,7 +41,9 @@
             android:layout_height="0dp"
             android:layout_weight="1"
             android:background="@color/gray_pink_100"
-            android:src="@drawable/ic_notifications_black_24dp"/>
+            android:padding="5dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_stars"/>
     </LinearLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
