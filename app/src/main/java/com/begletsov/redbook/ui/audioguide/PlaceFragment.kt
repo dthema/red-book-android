@@ -114,9 +114,11 @@ class PlaceFragment : Fragment() {
         mediaRouter.addCallback(ROUTE_TYPE_USER, callback, CALLBACK_FLAG_UNFILTERED_EVENTS)
         binding.placeBack.setOnClickListener { navController.navigate(R.id.action_navigation_place_pop) }
         binding.placePrev.setOnClickListener {
+            mediaPlayer.stop()
             setPlace(if (index == 0) places.size - 1 else index - 1)
         }
         binding.placeNext.setOnClickListener {
+            mediaPlayer.stop()
             setPlace(if (index == places.size - 1) 0 else index + 1)
         }
 
@@ -149,14 +151,15 @@ class PlaceFragment : Fragment() {
             return
         }
 
+        mediaPlayer = MediaPlayer.create(context, uri)
         binding.placeLoading.visibility = GONE
+
         binding.placeTitle.text = place.description.name
         if (place.description.imagePath.isNotEmpty())
             GlideApp.with(requireContext())
                 .load(place.description.imagePath)
                 .into(binding.placeImage)
 
-        mediaPlayer = MediaPlayer.create(context, uri)
         binding.placeCurrentMediaTime.text = getTimeString(0)
         binding.placeCurrentMaxMediaTime.text = getTimeString(mediaPlayer.duration.toLong())
         binding.placeMediaSlider.valueTo = mediaPlayer.duration.toFloat()
