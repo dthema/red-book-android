@@ -1,7 +1,9 @@
 package com.begletsov.redbook.models
 
+import java.util.ArrayList
 import java.util.UUID
 
-data class Category(val id: UUID,
-                    var name: String,
-                    val iconFilePath: String)
+data class Category(val id: UUID = UUID.randomUUID(),
+                    val name: String,
+                    val iconFilePath: String,
+                    val places: ArrayList<Place> = ArrayList())

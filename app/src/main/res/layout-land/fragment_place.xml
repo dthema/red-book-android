@@ -113,6 +113,15 @@
             app:layout_constraintStart_toEndOf="@+id/placeMediaVolumeIcon"
             app:layout_constraintTop_toTopOf="@+id/placeMediaVolumeIcon"
             app:srcCompat="@drawable/baseline_add" />
+
+        <com.google.android.material.slider.Slider
+            android:id="@+id/placeVolumeSlider"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/placeMediaVolumeUp"
+            app:layout_constraintStart_toStartOf="@+id/placeMediaVolumeDown"
+            app:layout_constraintTop_toBottomOf="@+id/placeMediaVolumeIcon" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.cardview.widget.CardView
