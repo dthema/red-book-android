@@ -5,6 +5,7 @@ import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.Drawable
+import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -48,9 +49,14 @@ class PlaceAdapter (private val context: Context) :
 
         fun bind(place: Place) {
             binding.placeName.text = place.description.name
+
+            val bundle = Bundle()
+            bundle.putString("id", place.id.toString())
+            bundle.putString("categoryId", place.categoryId.toString())
             binding.root.setOnClickListener {
-                navController.navigate(R.id.navigation_place)
+                navController.navigate(R.id.navigation_place, bundle)
             }
+
             if (place.description.imagePath.isEmpty())
                 binding.placeItemImage.visibility = View.GONE
             else

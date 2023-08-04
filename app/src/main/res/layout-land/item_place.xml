@@ -47,7 +47,6 @@
                 android:textAppearance="@style/item_title"
                 android:textFontWeight="650"
                 android:text="Место"
-                android:maxLines="1"
                 android:textSize="@dimen/item_title_text_size" />
         </LinearLayout>
 

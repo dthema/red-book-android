@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
+import com.begletsov.redbook.Data
 import com.begletsov.redbook.R
 import com.begletsov.redbook.databinding.FragmentAudioguideBinding
 import com.begletsov.redbook.databinding.FragmentChoosePlaceBinding
@@ -38,61 +39,15 @@ class ChoosePlaceFragment : Fragment() {
         val root: View = binding.root
         val navController = findNavController()
 
-        binding.placesCategoryTitle.text = "Бары"
+        val categoryId = UUID.fromString(requireArguments().getString("id"))
+        val category = Data.categories.first { it.id == categoryId }
+
+        binding.placesCategoryTitle.text = category.name
         viewModel = ViewModelProvider(this).get(ChoosePlaceViewModel::class.java)
         placeAdapter = PlaceAdapter(requireContext())
         binding.placesRecyclerView.adapter = placeAdapter
 
-        placeAdapter.submitList(listOf(
-            Place(
-                UUID.randomUUID(),
-                Description("Let’s Rock", "", "", "https://p1.zoon.ru/c/7/51ff64a2a0f3024a1a000015_5c6a764b312e4.jpg", ""),
-                UUID.randomUUID(),
-                Geopoint(0.0, 0.0)
-            ),
-            Place(
-                UUID.randomUUID(),
-                Description("Let’s Rock", "", "", "https://p1.zoon.ru/c/7/51ff64a2a0f3024a1a000015_5c6a764b312e4.jpg", ""),
-                UUID.randomUUID(),
-                Geopoint(0.0, 0.0)
-            ),
-            Place(
-                UUID.randomUUID(),
-                Description("Let’s Rock", "", "", "https://p1.zoon.ru/c/7/51ff64a2a0f3024a1a000015_5c6a764b312e4.jpg", ""),
-                UUID.randomUUID(),
-                Geopoint(0.0, 0.0)
-            ),
-            Place(
-                UUID.randomUUID(),
-                Description("Let’s Rock", "", "", "https://p1.zoon.ru/c/7/51ff64a2a0f3024a1a000015_5c6a764b312e4.jpg", ""),
-                UUID.randomUUID(),
-                Geopoint(0.0, 0.0)
-            ),
-            Place(
-                UUID.randomUUID(),
-                Description("Let’s Rock", "", "", "https://p1.zoon.ru/c/7/51ff64a2a0f3024a1a000015_5c6a764b312e4.jpg", ""),
-                UUID.randomUUID(),
-                Geopoint(0.0, 0.0)
-            ),
-            Place(
-                UUID.randomUUID(),
-                Description("Let’s Rock", "", "", "https://p1.zoon.ru/c/7/51ff64a2a0f3024a1a000015_5c6a764b312e4.jpg", ""),
-                UUID.randomUUID(),
-                Geopoint(0.0, 0.0)
-            ),
-            Place(
-                UUID.randomUUID(),
-                Description("Let’s Rock", "", "", "https://p1.zoon.ru/c/7/51ff64a2a0f3024a1a000015_5c6a764b312e4.jpg", ""),
-                UUID.randomUUID(),
-                Geopoint(0.0, 0.0)
-            ),
-            Place(
-                UUID.randomUUID(),
-                Description("Let’s Rock", "", "", "https://p1.zoon.ru/c/7/51ff64a2a0f3024a1a000015_5c6a764b312e4.jpg", ""),
-                UUID.randomUUID(),
-                Geopoint(0.0, 0.0)
-            ),
-            ))
+        placeAdapter.submitList(category.places)
 
         binding.placesBack.setOnClickListener { navController.navigate(R.id.action_navigation_choose_place_pop) }
 

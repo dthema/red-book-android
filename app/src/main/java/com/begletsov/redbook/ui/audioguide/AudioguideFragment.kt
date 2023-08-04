@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.begletsov.redbook.Data
 import com.begletsov.redbook.databinding.FragmentAudioguideBinding
 import com.begletsov.redbook.models.Category
 import com.begletsov.redbook.ui.audioguide.viewmodels.AudioguideViewModel
@@ -32,37 +33,7 @@ class AudioguideFragment : Fragment() {
         categoryAdapter = CategoryAdapter(requireContext())
         binding.audioguideCategoryRecycler.adapter = categoryAdapter
 
-        categoryAdapter.submitList(listOf(
-            Category(UUID.randomUUID(), "Достопримечательности", ""),
-            Category(UUID.randomUUID(), "Музеи", ""),
-            Category(UUID.randomUUID(), "Парки", ""),
-            Category(UUID.randomUUID(), "Пирсы", ""),
-            Category(UUID.randomUUID(), "Бары", ""),
-            Category(UUID.randomUUID(), "Бары", ""),
-            Category(UUID.randomUUID(), "Бары", ""),
-            Category(UUID.randomUUID(), "Бары", ""),
-            Category(UUID.randomUUID(), "Бары", ""),
-            Category(UUID.randomUUID(), "Бары", ""),
-            Category(UUID.randomUUID(), "Бары", ""),
-            Category(UUID.randomUUID(), "Бары", ""),
-            Category(UUID.randomUUID(), "Бары", ""),
-            Category(UUID.randomUUID(), "Бары", ""),
-            Category(UUID.randomUUID(), "Бары", ""),
-            Category(UUID.randomUUID(), "Бары", ""),
-            Category(UUID.randomUUID(), "Бары", ""),
-            Category(UUID.randomUUID(), "Бары", ""),
-            Category(UUID.randomUUID(), "Бары", ""),
-            Category(UUID.randomUUID(), "Бары", ""),
-            Category(UUID.randomUUID(), "Бары", ""),
-            Category(UUID.randomUUID(), "Бары", ""),
-            Category(UUID.randomUUID(), "Бары", ""),
-            Category(UUID.randomUUID(), "Бары", ""),
-            Category(UUID.randomUUID(), "Бары", ""),
-            Category(UUID.randomUUID(), "Бары", ""),
-            Category(UUID.randomUUID(), "Бары", ""),
-            Category(UUID.randomUUID(), "Бары", ""),
-            Category(UUID.randomUUID(), "Бары", ""),
-            Category(UUID.randomUUID(), "Другое", "")))
+        categoryAdapter.submitList(Data.categories)
 
         return root
     }

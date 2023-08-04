@@ -6,7 +6,6 @@ import android.content.Context
 import android.content.Context.MEDIA_ROUTER_SERVICE
 import android.content.Intent
 import android.content.IntentFilter
-import android.database.ContentObserver
 import android.media.AudioManager
 import android.media.MediaPlayer
 import android.media.MediaRouter
@@ -26,14 +25,14 @@ import androidx.core.content.ContextCompat.getSystemService
 import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.begletsov.redbook.Data
 import com.begletsov.redbook.R
 import com.begletsov.redbook.databinding.FragmentPlaceBinding
-import com.begletsov.redbook.models.Description
-import com.begletsov.redbook.models.Geopoint
 import com.begletsov.redbook.models.Place
 import com.begletsov.redbook.ui.utils.GlideApp
 import com.google.android.material.slider.Slider
 import java.io.File
+import java.util.ArrayList
 import java.util.UUID
 
 
@@ -45,10 +44,13 @@ class PlaceFragment : Fragment() {
     private lateinit var mediaPlayer: MediaPlayer
     private lateinit var audioManager: AudioManager
 
+    private var index = 0
+    private val places = ArrayList<Place>()
+
     private val downloadReceiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context?, intent: Intent?) {
             intent.let {
-                setPlace(place)
+                setPlace(index)
                 binding.placeLoading.visibility = GONE
                 unregisterBroadCastReceiver()
             }
@@ -64,6 +66,12 @@ class PlaceFragment : Fragment() {
         val root: View = binding.root
         val navController = findNavController()
         audioManager = getSystemService(requireContext(), AudioManager::class.java)!!
+
+        val categoryId = UUID.fromString(requireArguments().getString("categoryId"))
+        val placeId = UUID.fromString(requireArguments().getString("id"))
+        val category = Data.categories.first { it.id == categoryId }
+        places.addAll(category.places)
+        index = category.places.indexOfFirst { it.id == placeId }
 
         binding.placeMediaPlay.setOnClickListener {
             if (mediaPlayer.isPlaying) {
@@ -105,8 +113,14 @@ class PlaceFragment : Fragment() {
         val mediaRouter = requireContext().getSystemService(MEDIA_ROUTER_SERVICE) as MediaRouter
         mediaRouter.addCallback(ROUTE_TYPE_USER, callback, CALLBACK_FLAG_UNFILTERED_EVENTS)
         binding.placeBack.setOnClickListener { navController.navigate(R.id.action_navigation_place_pop) }
+        binding.placePrev.setOnClickListener {
+            setPlace(if (index == 0) places.size - 1 else index - 1)
+        }
+        binding.placeNext.setOnClickListener {
+            setPlace(if (index == places.size - 1) 0 else index + 1)
+        }
 
-        setPlace(place)
+        setPlace(index)
 
         return root
     }
@@ -126,12 +140,15 @@ class PlaceFragment : Fragment() {
         requireContext().unregisterReceiver(downloadReceiver)
     }
 
-    private fun setPlace(place: Place) {
+    private fun setPlace(placeIndex: Int) {
+        val place = places[placeIndex]
+
         val uri = downloadAudio(place)
         if (uri == null) {
             binding.placeLoading.visibility = VISIBLE
             return
         }
+
         binding.placeLoading.visibility = GONE
         binding.placeTitle.text = place.description.name
         if (place.description.imagePath.isNotEmpty())
@@ -151,6 +168,13 @@ class PlaceFragment : Fragment() {
                 mediaPlayer.seekTo(slider.value.toInt())
             }
         })
+
+        binding.placePrevName.text = places[if (placeIndex == 0) places.size - 1 else placeIndex - 1]
+                                        .description.name
+        binding.placeNextName.text = places[if (placeIndex == places.size - 1) 0 else placeIndex + 1]
+            .description.name
+
+        index = placeIndex
     }
 
     private fun downloadAudio(place: Place): Uri? {

@@ -30,18 +30,6 @@ class MainActivity : AppCompatActivity() {
         supportActionBar?.hide()
 
         val navController = findNavController(R.id.nav_host_fragment_activity_main)
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
-        val appBarConfiguration = AppBarConfiguration(
-            setOf(
-                R.id.navigation_audioguide,
-                R.id.navigation_excursion,
-                R.id.navigation_moodguide,
-                R.id.navigation_choose_place
-            )
-        )
-        setupActionBarWithNavController(navController, appBarConfiguration)
-
         navController.navigate(R.id.navigation_audioguide)
 
         binding.mainAudioGuideButton.setOnClickListener { navController.navigate(R.id.navigation_audioguide) }

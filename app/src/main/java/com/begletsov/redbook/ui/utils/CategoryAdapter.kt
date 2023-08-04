@@ -3,6 +3,7 @@ package com.begletsov.redbook.ui.utils
 import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.GONE
@@ -47,8 +48,11 @@ class CategoryAdapter(private val context: Context) :
                     .with(context)
                     .load(category.iconFilePath)
                     .into(binding.categoryIcon)
+            val bundle = Bundle()
+
+            bundle.putString("id", category.id.toString())
             binding.root.setOnClickListener {
-                navController.navigate(R.id.navigation_choose_place)
+                navController.navigate(R.id.navigation_choose_place, bundle)
             }
         }
     }
