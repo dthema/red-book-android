@@ -55,9 +55,9 @@ class MainActivity : AppCompatActivity() {
             if (destination.id == R.id.navigation_audioguide ||
                 destination.id == R.id.navigation_excursion ||
                 destination.id == R.id.navigation_moodguide) {
-                binding.optionMenu.visibility = GONE
+                binding.likeButton.visibility = GONE
             } else {
-                binding.optionMenu.visibility = VISIBLE
+                binding.likeButton.visibility = VISIBLE
             }
         }
 

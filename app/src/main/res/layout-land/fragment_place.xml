@@ -163,7 +163,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/item_place_background">
+                android:background="@drawable/item_audioguide_place_background">
 
                 <TextView
                     android:id="@+id/placePrevName"
@@ -199,7 +199,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/item_place_background">
+            android:background="@drawable/item_audioguide_place_background">
 
             <TextView
                 android:id="@+id/placeNextName"
