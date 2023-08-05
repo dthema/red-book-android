@@ -78,9 +78,12 @@ class MainActivity : AppCompatActivity(), RecognitionListener {
         recognizerIntent.putExtra(RecognizerIntent.EXTRA_SPEECH_INPUT_COMPLETE_SILENCE_LENGTH_MILLIS, "5000")
         recognizerIntent.putExtra(RecognizerIntent.EXTRA_MAX_RESULTS, 1)
 
+        binding.recognizeLayout.recognizeProgressBar.max = 10
+
         binding.recognizeStartButton.setOnClickListener {
             val havePermission = requirePermission(listOf(Manifest.permission.RECORD_AUDIO), REQUEST_RECORD_PERMISSION)
             if (!havePermission) return@setOnClickListener
+            clearRecognizeLayout()
             binding.recognizeLayout.root.visibility = VISIBLE
             speech.startListening(recognizerIntent)
         }
@@ -115,22 +118,11 @@ class MainActivity : AppCompatActivity(), RecognitionListener {
         return false
     }
 
-    override fun onBeginningOfSpeech() {
-        binding.recognizeLayout.recognizeProgressBar.isIndeterminate = false
-        binding.recognizeLayout.recognizeUserText.text = getString(R.string.recognize_text_in_progress)
-        binding.recognizeLayout.recognizeProgressBar.visibility = VISIBLE
-        binding.recognizeLayout.recognizeAnswer.visibility = INVISIBLE
-        binding.recognizeLayout.recognizeButton.visibility = INVISIBLE
-        binding.recognizeLayout.recognizeProgressBar.max = 10
-    }
+    override fun onBeginningOfSpeech() { }
 
     override fun onBufferReceived(buffer: ByteArray?) {}
 
-    override fun onEndOfSpeech() {
-        binding.recognizeLayout.recognizeProgressBar.isIndeterminate = true
-        binding.recognizeLayout.recognizeProgressBar.visibility = INVISIBLE
-        binding.recognizeLayout.recognizeButton.visibility = VISIBLE
-    }
+    override fun onEndOfSpeech() { }
 
     override fun onError(errorCode: Int) {
         binding.recognizeLayout.recognizeUserText.text = getString(R.string.recognize_error)
@@ -147,6 +139,7 @@ class MainActivity : AppCompatActivity(), RecognitionListener {
         val result = results.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION)!![0]
         binding.recognizeLayout.recognizeUserText.text = result
         binding.recognizeLayout.recognizeAnswer.visibility = VISIBLE
+        binding.recognizeLayout.recognizeProgressBar.visibility = GONE
         if (result.contains("место")) {
             val placeResult = result.split("место ")[1].split(" ")[0].lowercase()
             val place = Data.categories.firstOrNull { it.places.any { it.description.name.split(" ")[0].lowercase() == placeResult } }
@@ -182,18 +175,28 @@ class MainActivity : AppCompatActivity(), RecognitionListener {
     }
 
     private fun setErrorRecognizeButton() {
+        binding.recognizeLayout.recognizeButton.visibility = VISIBLE
         binding.recognizeLayout.recognizeButton.text = "Повторить"
         binding.recognizeLayout.recognizeButton.setOnClickListener {
             speech.startListening(recognizerIntent)
+            clearRecognizeLayout()
         }
     }
 
     private fun setSuccessRecognizeButton(id: Int, bundle: Bundle) {
+        binding.recognizeLayout.recognizeButton.visibility = VISIBLE
         binding.recognizeLayout.recognizeButton.text = "Перейти"
         binding.recognizeLayout.recognizeButton.setOnClickListener {
             binding.recognizeLayout.root.visibility = GONE
             navController.navigate(id, bundle)
         }
+    }
+
+    private fun clearRecognizeLayout() {
+        binding.recognizeLayout.recognizeUserText.text = getString(R.string.recognize_text_in_progress)
+        binding.recognizeLayout.recognizeProgressBar.visibility = VISIBLE
+        binding.recognizeLayout.recognizeAnswer.visibility = INVISIBLE
+        binding.recognizeLayout.recognizeButton.visibility = INVISIBLE
     }
 
     companion object {

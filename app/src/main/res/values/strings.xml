@@ -8,7 +8,7 @@
     <string name="excursion_ready">Готовые</string>
     <string name="excursion_near">Поймать маршрут</string>
     <string name="excursion_create">Создать</string>
-    <string name="recognize_text_in_progress">Распознавание речи...</string>
+    <string name="recognize_text_in_progress">Распознавание речи…</string>
     <string name="recognize_tip">Для перехода к категории или месту скажите: \"[Место|Категория] [Название]\"</string>
     <string name="recognize_error">Речь не распознана</string>
     <string name="recognize_error_place">Не удалось найти место</string>
