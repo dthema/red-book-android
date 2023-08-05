@@ -41,13 +41,14 @@ class CategoryAdapter(private val context: Context) :
 
         fun bind(category: Category) {
             binding.categoryName.text = category.name
-            if (category.iconFilePath.isEmpty())
-                binding.categoryIcon.visibility = GONE
-            else
-                GlideApp
-                    .with(context)
-                    .load(category.iconFilePath)
-                    .into(binding.categoryIcon)
+//            if (category.iconFilePath.isEmpty())
+//                binding.categoryIcon.visibility = GONE
+//            else
+//                GlideApp
+//                    .with(context)
+//                    .load(category.iconFilePath)
+//                    .into(binding.categoryIcon)
+            binding.categoryIcon.setImageResource(category.iconFilePath)
             val bundle = Bundle()
 
             bundle.putString("id", category.id.toString())

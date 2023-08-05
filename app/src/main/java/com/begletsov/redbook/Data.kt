@@ -12,27 +12,27 @@ object Data {
         categories = listOf(
             Category(
                 name = "Музеи",
-                iconFilePath = "https://cdn-icons-png.flaticon.com/512/1183/1183878.png",
+                iconFilePath = R.drawable.museum,
             ),
             Category(
                 name = "Театры",
-                iconFilePath = "https://cdn-icons-png.flaticon.com/512/1838/1838392.png",
-            ),
-            Category(
-                name = "Парки и сады",
-                iconFilePath = "https://cdn-icons-png.flaticon.com/512/195/195649.png",
+                iconFilePath = R.drawable.theater,
             ),
             Category(
                 name = "Соборы",
-                iconFilePath = "https://cdn-icons-png.flaticon.com/512/3056/3056106.png",
+                iconFilePath = R.drawable.cathedral,
             ),
             Category(
-                name = "Дворцы",
-                iconFilePath = "https://cdn-icons-png.flaticon.com/512/5626/5626899.png",
+                name = "Маршруты известных людей",
+                iconFilePath = R.drawable.ways,
             ),
             Category(
-                name = "Достопримечательности",
-                iconFilePath = "https://cdn-icons-png.flaticon.com/512/1207/1207259.png",
+                name = "Парки и сады",
+                iconFilePath = R.drawable.parks,
+            ),
+            Category(
+                name = "Байки",
+                iconFilePath = R.drawable.bike,
             )
         )
 
