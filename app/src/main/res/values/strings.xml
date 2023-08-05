@@ -13,4 +13,6 @@
     <string name="recognize_error">Речь не распознана</string>
     <string name="recognize_error_place">Не удалось найти место</string>
     <string name="recognize_error_category">Не удалось найти категорию</string>
+    <string name="recognize_category">Найдена категория %1$s</string>
+    <string name="recognize_place">Найдено место %1$s</string>
 </resources>

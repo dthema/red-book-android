@@ -126,6 +126,7 @@ class MainActivity : AppCompatActivity(), RecognitionListener {
 
     override fun onError(errorCode: Int) {
         binding.recognizeLayout.recognizeUserText.text = getString(R.string.recognize_error)
+        binding.recognizeLayout.recognizeProgressBar.visibility = GONE
         setErrorRecognizeButton()
     }
 
@@ -149,6 +150,7 @@ class MainActivity : AppCompatActivity(), RecognitionListener {
                 setErrorRecognizeButton()
                 return
             }
+            binding.recognizeLayout.recognizeAnswerText.text = getString(R.string.recognize_place, place.description.name)
             val bundle = Bundle()
             bundle.putString("id", place.id.toString())
             bundle.putString("categoryId", place.categoryId.toString())
@@ -161,6 +163,8 @@ class MainActivity : AppCompatActivity(), RecognitionListener {
                 setErrorRecognizeButton()
                 return
             }
+            binding.recognizeLayout.recognizeAnswerText.text =
+                getString(R.string.recognize_category, category.name)
             val bundle = Bundle()
             bundle.putString("id", category.id.toString())
             setSuccessRecognizeButton(R.id.navigation_choose_place, bundle)
