@@ -79,8 +79,8 @@ class PlaceFragment : Fragment() {
                 binding.placeMediaPlay.setImageResource(R.drawable.baseline_play_arrow)
             } else {
                 mediaPlayer.start()
-                binding.placeMediaPlay.setImageResource(R.drawable.baseline_pause)
                 sliderProgressUpdater()
+                binding.placeMediaPlay.setImageResource(R.drawable.baseline_pause)
             }
         }
 
@@ -95,11 +95,28 @@ class PlaceFragment : Fragment() {
         }
 
         binding.placeMediaVolumeUp.setOnClickListener {
+            if (audioManager.isStreamMute(AudioManager.STREAM_MUSIC))
+                binding.placeMediaVolumeMute.setImageResource(R.drawable.baseline_volume)
             audioManager.adjustVolume(AudioManager.ADJUST_RAISE, AudioManager.FLAG_PLAY_SOUND)
         }
 
         binding.placeMediaVolumeDown.setOnClickListener {
             audioManager.adjustVolume(AudioManager.ADJUST_LOWER, AudioManager.FLAG_PLAY_SOUND)
+        }
+
+        if (audioManager.isStreamMute(AudioManager.FLAG_PLAY_SOUND)) {
+            binding.placeMediaVolumeMute.setImageResource(R.drawable.baseline_volume_off)
+        } else {
+            binding.placeMediaVolumeMute.setImageResource(R.drawable.baseline_volume)
+        }
+        binding.placeMediaVolumeMute.setOnClickListener {
+            if (audioManager.isStreamMute(AudioManager.STREAM_MUSIC)) {
+                audioManager.adjustVolume(AudioManager.ADJUST_UNMUTE, AudioManager.FLAG_PLAY_SOUND)
+                binding.placeMediaVolumeMute.setImageResource(R.drawable.baseline_volume)
+            } else {
+                audioManager.adjustVolume(AudioManager.ADJUST_MUTE, AudioManager.FLAG_PLAY_SOUND)
+                binding.placeMediaVolumeMute.setImageResource(R.drawable.baseline_volume_off)
+            }
         }
 
         binding.placeVolumeSlider.valueTo = audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC).toFloat()
@@ -108,7 +125,10 @@ class PlaceFragment : Fragment() {
             override fun onStartTrackingTouch(slider: Slider) { }
 
             override fun onStopTrackingTouch(slider: Slider) {
-                audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, slider.value.toInt(), AudioManager.FLAG_PLAY_SOUND)            }
+                if (audioManager.isStreamMute(AudioManager.STREAM_MUSIC))
+                    binding.placeMediaVolumeMute.setImageResource(R.drawable.baseline_volume)
+                audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, slider.value.toInt(), AudioManager.FLAG_PLAY_SOUND)
+            }
         })
         val mediaRouter = requireContext().getSystemService(MEDIA_ROUTER_SERVICE) as MediaRouter
         mediaRouter.addCallback(ROUTE_TYPE_USER, callback, CALLBACK_FLAG_UNFILTERED_EVENTS)
@@ -162,7 +182,8 @@ class PlaceFragment : Fragment() {
 
         binding.placeCurrentMediaTime.text = getTimeString(0)
         binding.placeCurrentMaxMediaTime.text = getTimeString(mediaPlayer.duration.toLong())
-        binding.placeMediaSlider.valueTo = mediaPlayer.duration.toFloat()
+        binding.placeMediaSlider.valueTo = mediaPlayer.duration.toFloat() / 1000
+        binding.placeMediaSlider.valueFrom = 0F
 
         binding.placeMediaSlider.addOnSliderTouchListener(object : Slider.OnSliderTouchListener {
             override fun onStartTrackingTouch(slider: Slider) { }
@@ -209,7 +230,7 @@ class PlaceFragment : Fragment() {
     }
 
     private fun updateSlider() {
-        binding.placeMediaSlider.value = mediaPlayer.currentPosition.toFloat()
+        binding.placeMediaSlider.value = mediaPlayer.currentPosition.toFloat() / 1000
         binding.placeCurrentMediaTime.text = getTimeString(mediaPlayer.currentPosition.toLong())
     }
 

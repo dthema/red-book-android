@@ -65,6 +65,16 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent"/>
 
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/recognizeStartButton"
+            android:layout_width="55dp"
+            android:layout_height="55dp"
+            android:layout_weight="1"
+            android:background="@color/gray_pink_100"
+            android:src="@drawable/baseline_mic"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
 
         <androidx.appcompat.widget.AppCompatImageButton
             android:id="@+id/settingsButton"
@@ -88,5 +98,13 @@
         app:layout_constraintStart_toEndOf="@+id/mainMenu"
         app:layout_constraintTop_toTopOf="parent"
         app:navGraph="@navigation/mobile_navigation" />
+
+    <include
+        android:id="@+id/recognizeLayout"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        layout="@layout/recognize_layout"
+        android:elevation="3dp"
+        android:visibility="gone"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

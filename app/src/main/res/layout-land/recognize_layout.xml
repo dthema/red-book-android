@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:alpha="0.98"
+    android:clickable="true"
+    android:background="@color/gray_purple_700">
+
+    <ProgressBar
+        android:id="@+id/recognizeProgressBar"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="400dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_margin="16dp"
+        android:layout_marginBottom="32dp"
+        android:indeterminate="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageButton
+        android:id="@+id/recognizeBack"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="32dp"
+        android:backgroundTint="@color/gray_purple_700"
+        android:rotation="180"
+        android:src="@drawable/baseline_double_arrow_pink"
+        android:textAppearance="@style/fragment_title"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/recognizeBackText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="24dp"
+        android:text="Назад"
+        android:textSize="32sp"
+        android:textAppearance="@style/fragment_title"
+        android:textColor="@color/gray_pink_100"
+        app:layout_constraintBottom_toBottomOf="@+id/recognizeBack"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@id/recognizeBack"
+        app:layout_constraintTop_toTopOf="@id/recognizeBack"
+        app:layout_constraintVertical_bias="0.43" />
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/recognizeUser"
+        android:layout_width="500dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="32dp"
+        app:cardBackgroundColor="@color/gray_pink_100"
+        app:cardCornerRadius="@dimen/item_corners_radius"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.4">
+
+        <TextView
+            android:id="@+id/recognizeUserText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top|start"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:text="@string/recognize_text_in_progress"
+            android:textAppearance="@style/item_title"
+            android:textSize="@dimen/item_title_text_size" />
+
+    </com.google.android.material.card.MaterialCardView>
+
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/recognizeAnswer"
+        android:layout_width="500dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32sp"
+        app:cardBackgroundColor="@color/gray_pink_100"
+        app:cardCornerRadius="@dimen/item_corners_radius"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.6">
+
+        <TextView
+            android:id="@+id/recognizeAnswerText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top|start"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:visibility="gone"
+            android:textAppearance="@style/item_title"
+            android:textSize="@dimen/item_title_text_size" />
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/recognizeButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"
+        android:text="Перейти"
+        android:visibility="gone"
+        app:strokeColor="@color/gray_pink_100"
+        android:textColor="@color/gray_pink_100"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+        app:layout_constraintBottom_toTopOf="@+id/recognizeProgressBar"
+        app:layout_constraintEnd_toEndOf="@+id/recognizeProgressBar"
+        app:layout_constraintStart_toStartOf="@+id/recognizeProgressBar" />
+</androidx.constraintlayout.widget.ConstraintLayout>
