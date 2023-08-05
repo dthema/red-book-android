@@ -47,6 +47,11 @@ class PlaceFragment : Fragment() {
     private var index = 0
     private val places = ArrayList<Place>()
 
+    private val handler = Handler(Looper.myLooper()!!)
+    private val sliderCallback = Runnable {
+        sliderProgressUpdater()
+    }
+
     private val downloadReceiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context?, intent: Intent?) {
             intent.let {
@@ -79,19 +84,16 @@ class PlaceFragment : Fragment() {
                 binding.placeMediaPlay.setImageResource(R.drawable.baseline_play_arrow)
             } else {
                 mediaPlayer.start()
-                sliderProgressUpdater()
                 binding.placeMediaPlay.setImageResource(R.drawable.baseline_pause)
             }
         }
 
         binding.placeMediaForward.setOnClickListener {
             mediaPlayer.seekTo(mediaPlayer.currentPosition + 10000)
-            updateSlider()
         }
 
         binding.placeMediaReplay.setOnClickListener {
             mediaPlayer.seekTo(mediaPlayer.currentPosition - 10000)
-            updateSlider()
         }
 
         binding.placeMediaVolumeUp.setOnClickListener {
@@ -121,15 +123,14 @@ class PlaceFragment : Fragment() {
 
         binding.placeVolumeSlider.valueTo = audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC).toFloat()
         binding.placeVolumeSlider.value = audioManager.getStreamVolume(AudioManager.STREAM_MUSIC).toFloat()
-        binding.placeVolumeSlider.addOnSliderTouchListener(object : Slider.OnSliderTouchListener {
-            override fun onStartTrackingTouch(slider: Slider) { }
-
-            override fun onStopTrackingTouch(slider: Slider) {
+        binding.placeVolumeSlider.addOnChangeListener { slider, value, fromUser ->
+            if (fromUser) {
                 if (audioManager.isStreamMute(AudioManager.STREAM_MUSIC))
                     binding.placeMediaVolumeMute.setImageResource(R.drawable.baseline_volume)
-                audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, slider.value.toInt(), AudioManager.FLAG_PLAY_SOUND)
+                audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, value.toInt(), AudioManager.FLAG_PLAY_SOUND)
             }
-        })
+        }
+
         val mediaRouter = requireContext().getSystemService(MEDIA_ROUTER_SERVICE) as MediaRouter
         mediaRouter.addCallback(ROUTE_TYPE_USER, callback, CALLBACK_FLAG_UNFILTERED_EVENTS)
         binding.placeBack.setOnClickListener { navController.navigate(R.id.action_navigation_place_pop) }
@@ -152,6 +153,7 @@ class PlaceFragment : Fragment() {
         mediaPlayer?.let {
             mediaPlayer.stop()
         }
+        handler.removeCallbacks(sliderCallback)
     }
 
     private fun registerBroadCastReceiver() {
@@ -164,6 +166,7 @@ class PlaceFragment : Fragment() {
 
     private fun setPlace(placeIndex: Int) {
         val place = places[placeIndex]
+        handler.removeCallbacks(sliderCallback)
 
         val uri = downloadAudio(place)
         if (uri == null) {
@@ -173,6 +176,7 @@ class PlaceFragment : Fragment() {
 
         mediaPlayer = MediaPlayer.create(context, uri)
         binding.placeLoading.visibility = GONE
+        sliderProgressUpdater()
 
         binding.placeTitle.text = place.description.name
         if (place.description.imagePath.isNotEmpty())
@@ -181,17 +185,12 @@ class PlaceFragment : Fragment() {
                 .into(binding.placeImage)
 
         binding.placeCurrentMediaTime.text = getTimeString(0)
-        binding.placeCurrentMaxMediaTime.text = getTimeString(mediaPlayer.duration.toLong())
-        binding.placeMediaSlider.valueTo = mediaPlayer.duration.toFloat() / 1000
-        binding.placeMediaSlider.valueFrom = 0F
+        binding.placeCurrentMaxMediaTime.text = getTimeString(mediaPlayer.duration)
+        binding.placeMediaSlider.valueTo = mediaPlayer.duration.toFloat()
 
-        binding.placeMediaSlider.addOnSliderTouchListener(object : Slider.OnSliderTouchListener {
-            override fun onStartTrackingTouch(slider: Slider) { }
-
-            override fun onStopTrackingTouch(slider: Slider) {
-                mediaPlayer.seekTo(slider.value.toInt())
-            }
-        })
+        binding.placeMediaSlider.addOnChangeListener { slider, value, fromUser ->
+            if (fromUser) mediaPlayer.seekTo(value.toInt())
+        }
 
         binding.placePrevName.text = places[if (placeIndex == 0) places.size - 1 else placeIndex - 1]
                                         .description.name
@@ -222,23 +221,19 @@ class PlaceFragment : Fragment() {
 
     private fun sliderProgressUpdater() {
         updateSlider()
-        if (mediaPlayer.isPlaying) {
-            val notification = Runnable { sliderProgressUpdater() }
-            handler.postDelayed(notification, 100)
-        } else
-            binding.placeMediaPlay.setImageResource(R.drawable.baseline_play_arrow)
+        handler.postDelayed(sliderCallback, 500)
     }
 
     private fun updateSlider() {
-        binding.placeMediaSlider.value = mediaPlayer.currentPosition.toFloat() / 1000
-        binding.placeCurrentMediaTime.text = getTimeString(mediaPlayer.currentPosition.toLong())
+        binding.placeMediaSlider.value = mediaPlayer.currentPosition.toFloat()
+        binding.placeCurrentMediaTime.text = getTimeString(mediaPlayer.currentPosition)
     }
 
-    private fun getTimeString(millis: Long): String {
+    private fun getTimeString(millis: Int): String {
         val buf = StringBuffer()
-        val hours = (millis / (1000 * 60 * 60)).toInt()
-        val minutes = (millis % (1000 * 60 * 60) / (1000 * 60)).toInt()
-        val seconds = (millis % (1000 * 60 * 60) % (1000 * 60) / 1000).toInt()
+        val hours = (millis / (1000 * 60 * 60))
+        val minutes = (millis % (1000 * 60 * 60) / (1000 * 60))
+        val seconds = (millis % (1000 * 60 * 60) % (1000 * 60) / 1000)
         if (hours != 0) {
             buf.append(String.format("%02d", hours))
                 .append(":")
@@ -267,9 +262,5 @@ class PlaceFragment : Fragment() {
         override fun onRouteVolumeChanged(p0: MediaRouter?, info: MediaRouter.RouteInfo?) {
             binding.placeVolumeSlider.value = info?.volume?.toFloat() ?: binding.placeVolumeSlider.value
         }
-    }
-
-    companion object {
-        private val handler = Handler(Looper.myLooper()!!)
     }
 }
